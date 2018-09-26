@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "YSimpleImagePicker"
-  s.version      = "2.0"
+  s.version      = "3.0"
   s.summary      = "it is simple image picker from camera or gallery"
   s.description  = <<-DESC
 This is IOS Swift 3.3 + Library for Image picking from gallery or camera with some simple customization.
