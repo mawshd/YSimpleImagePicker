@@ -163,8 +163,8 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # define SWIFT_DEPRECATED_OBJC(Msg) SWIFT_DEPRECATED_MSG(Msg)
 #endif
 #if __has_feature(modules)
-@import ObjectiveC;
 @import UIKit;
+@import ObjectiveC;
 #endif
 
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
@@ -183,12 +183,15 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #endif
 
 
-SWIFT_CLASS("_TtC18YSimpleImagePicker9DriBerSDK")
-@interface DriBerSDK : NSObject
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+
+
+SWIFT_CLASS("_TtC18YSimpleImagePicker18YSimpleImagePicker")
+@interface YSimpleImagePicker : NSObject
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) YSimpleImagePicker * _Nonnull shared;)
++ (YSimpleImagePicker * _Nonnull)shared SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
 @end
-
-
 
 #if __has_attribute(external_source_symbol)
 # pragma clang attribute pop

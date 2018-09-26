@@ -7,39 +7,107 @@
 //
 
 import Foundation
+import UIKit
 
+public enum ImageSelectionType : Int {
+    case both
+    case camera
+    case gallery
+}
 
-public class DriBerSDK : NSObject, YImgPickerDelegate {
+public class YSimpleImagePicker : NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    var onImgPickingFinish:(UIImage)->() = {_ in}
-    var onCancelling:(String)->() = {_ in}
-    var refController = UIViewController()
-    
-    func selectImage(refController:UIViewController, shouldOpenFrontCamera : Bool = false, imgSelectionType : ImageSelectionType = .both, onSelection : @escaping (_ image : UIImage) -> Void, onCancellation : @escaping (_ str : String) -> Void ) {
+    open static let shared = YSimpleImagePicker()
+    private override init() {
         
+    }
+    
+    private var onImgPickingFinish:(UIImage)->() = {_ in}
+    private var onCancelling:(String)->() = {_ in}
+    private var refController : UIViewController?
+    private var imgPickerController = UIImagePickerController()
+    
+    private var allowEditing = false
+    private var shouldOpenFrontCamera = false
+
+    
+    open func selectImage(refController:UIViewController, allowEditing: Bool = false, shouldOpenFrontCamera : Bool = false, imgSelectionType : ImageSelectionType = .both, onSelection : @escaping (_ image : UIImage) -> Void, onCancellation : @escaping (_ str : String) -> Void ) {
+        
+        self.refController = refController
+        self.allowEditing = allowEditing
+        self.shouldOpenFrontCamera = shouldOpenFrontCamera
         self.onImgPickingFinish = onSelection
         self.onCancelling = onCancellation
-        self.refController = refController
         
-        let vc = YImagePickerVC(nibName: "YImagePickerVC", bundle: nil)
-        vc.delegate = self
+        imgPickerController.delegate = self
         
-        vc.shouldOpenFrontCamera = shouldOpenFrontCamera
-        vc.imgSelectionType = imgSelectionType
-        
-        DispatchQueue.main.async {
-            refController.modalPresentationStyle = .overCurrentContext
-            refController.present(vc, animated: true, completion: nil)
+        if imgSelectionType == .both {
+            let alert=UIAlertController(title: "Select Option", message: nil, preferredStyle: UIDevice.current.userInterfaceIdiom == .pad ? .alert : .actionSheet)
+            let cameraAction = UIAlertAction(title: "Camera", style: UIAlertActionStyle.default) {
+                UIAlertAction in self.openCamera()
+            }
+            let gallaryAction = UIAlertAction(title: "Gallary", style: UIAlertActionStyle.default) {
+                UIAlertAction in self.openGallary()
+            }
+            let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel) {
+                UIAlertAction in
+                onCancellation("Cancelled from action sheet")
+            }
+            
+            // Add the actions
+            alert.addAction(cameraAction)
+            alert.addAction(gallaryAction)
+            alert.addAction(cancelAction)
+            
+            refController.present(alert, animated: true, completion: nil)
+        }
+        else if imgSelectionType == .camera {
+            openCamera()
+        }
+        else {
+            openGallary()
         }
     }
     
-    func didFinishImagePicking(image: UIImage) {
-        onImgPickingFinish(image)
-        refController.dismiss(animated: false, completion: nil)
+    
+    func openCamera(){
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
+            imgPickerController.sourceType = UIImagePickerControllerSourceType.camera;
+            if shouldOpenFrontCamera {
+                imgPickerController.cameraDevice = .front
+            }
+            imgPickerController.allowsEditing = allowEditing
+            refController?.present(imgPickerController, animated: true, completion: nil)
+        }
+        else{
+            openGallary()
+        }
     }
     
-    func didCancelImagePicking(str: String) {
-        onCancelling(str)
-        refController.dismiss(animated: false, completion: nil)
+    func openGallary() {
+        imgPickerController.sourceType = UIImagePickerControllerSourceType.photoLibrary
+        imgPickerController.allowsEditing = allowEditing
+        refController?.present(imgPickerController, animated: true, completion: nil)
     }
+    
+    
+    public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let img = info[allowEditing ? UIImagePickerControllerEditedImage : UIImagePickerControllerOriginalImage] as? UIImage {
+            onImgPickingFinish(img)
+        }
+        else {
+            onCancelling("image not found")
+        }
+        
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    public func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        onCancelling("cancel image picking")
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    
 }

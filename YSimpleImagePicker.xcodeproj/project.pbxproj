@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		08720D80215BB1E600507DD4 /* YSimpleImagePicker.h in Headers */ = {isa = PBXBuildFile; fileRef = 08720D7E215BB1E600507DD4 /* YSimpleImagePicker.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		08720D88215BB22700507DD4 /* YImagePickerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08720D86215BB22700507DD4 /* YImagePickerVC.swift */; };
-		08720D89215BB22700507DD4 /* YImagePickerVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08720D87215BB22700507DD4 /* YImagePickerVC.xib */; };
 		08720D8B215BB3FE00507DD4 /* YSimpleImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08720D8A215BB3FE00507DD4 /* YSimpleImagePicker.swift */; };
 /* End PBXBuildFile section */
 
@@ -17,8 +15,6 @@
 		08720D7B215BB1E600507DD4 /* YSimpleImagePicker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = YSimpleImagePicker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		08720D7E215BB1E600507DD4 /* YSimpleImagePicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YSimpleImagePicker.h; sourceTree = "<group>"; };
 		08720D7F215BB1E600507DD4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		08720D86215BB22700507DD4 /* YImagePickerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YImagePickerVC.swift; sourceTree = "<group>"; };
-		08720D87215BB22700507DD4 /* YImagePickerVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YImagePickerVC.xib; sourceTree = "<group>"; };
 		08720D8A215BB3FE00507DD4 /* YSimpleImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YSimpleImagePicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -54,8 +50,6 @@
 			children = (
 				08720D7E215BB1E600507DD4 /* YSimpleImagePicker.h */,
 				08720D7F215BB1E600507DD4 /* Info.plist */,
-				08720D86215BB22700507DD4 /* YImagePickerVC.swift */,
-				08720D87215BB22700507DD4 /* YImagePickerVC.xib */,
 				08720D8A215BB3FE00507DD4 /* YSimpleImagePicker.swift */,
 			);
 			path = YSimpleImagePicker;
@@ -130,7 +124,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				08720D89215BB22700507DD4 /* YImagePickerVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,7 +134,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				08720D88215BB22700507DD4 /* YImagePickerVC.swift in Sources */,
 				08720D8B215BB3FE00507DD4 /* YSimpleImagePicker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
