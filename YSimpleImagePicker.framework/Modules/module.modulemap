@@ -1,0 +1,11 @@
+framework module YSimpleImagePicker {
+  umbrella header "YSimpleImagePicker.h"
+
+  export *
+  module * { export * }
+}
+
+module YSimpleImagePicker.Swift {
+    header "YSimpleImagePicker-Swift.h"
+    requires objc
+}
