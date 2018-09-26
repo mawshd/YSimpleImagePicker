@@ -21,23 +21,18 @@ Second, install `YSimpleImagePicker` into your project:
 pod install
 ```
 
-### Usage
-
-# Step 1
+## Usage
 
 Import Library into View Controller
 
 ```ruby
 import YSimpleImagePicker
 ```
-# Step 2
 
 Then create shared instance as
 ```ruby
 let shared = YSimpleImagePicker.shared
 ```
-
-# Step 3
 
 ```ruby
 shared.selectImage(refController: self, onSelection: { (img) in
