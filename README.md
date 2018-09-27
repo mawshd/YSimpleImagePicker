@@ -35,7 +35,7 @@ let shared = YSimpleImagePicker.shared
 ```
 
 ```ruby
-shared.selectImage(refController: self, onSelection: { (img) in
+        shared.selectImage(refController: self, onSelection: { (img) in
             self.imageview.image = img
         }) { (error) in
             print(error)
