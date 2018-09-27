@@ -29,17 +29,17 @@ Import Library into View Controller
 import YSimpleImagePicker
 ```
 
-Then create shared instance as
+Then get shared instance as
 ```ruby
 let shared = YSimpleImagePicker.shared
 ```
 
 ```ruby
-        shared.selectImage(refController: self, onSelection: { (img) in
-            self.imageview.image = img
-        }) { (error) in
-            print(error)
-        }
+shared.selectImage(refController: self, onSelection: { (img) in
+        self.imageview.image = img
+}) { (error) in
+        print(error)
+}
 ```
 
 ## License
